@@ -1,0 +1,58 @@
+:root{
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+    --main:#102e4a;
+    --background:#f7f7f2;
+    --ex:#89aac7;
+    --d-text:#000000;
+    --l-text:#ffffff;
+    --font-base:'Titllium Web', sans-serif;
+}
+
+.titillium-web-light{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.titillium-web-regular{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.titillium-web-semibold{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.titillium-web-bold{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+    line-height: 1.5;
+    font-family: var(--font-base);
+    background-color: var(--background);
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+body::-webkit-scrollbar{
+    width: 0.40rem; 
+}
+ 
+body::-webkit-scrollbar-track{
+     background: rgba(0, 0, 0, 0.05); 
+}
+ 
+body::-webkit-scrollbar-thumb{
+     background: var(--ex);
+}

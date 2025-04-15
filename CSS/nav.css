@@ -8,6 +8,12 @@
     --font-base:'Titllium Web', sans-serif;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .titillium-web-light{
     font-family: "Titillium Web", sans-serif;
     font-weight: 300;
@@ -34,7 +40,6 @@
 
 html, body{
     height: 100%;
-    margin: 0;
     line-height: 1.5;
     font-family: var(--font-base);
     background-color: var(--background);

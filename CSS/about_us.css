@@ -1,0 +1,68 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, var(--background), var(--ex));
+}
+
+.about-us {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-us h1 {
+    font-size: 85px;
+    font-weight: 700;
+    color: var(--d-text);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.about-us h1::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--ex); /* Blue underline */
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.about-section .reverse {
+    flex-direction: row-reverse;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.about-text p {
+    font-size: 28px;
+    line-height: 1.8;
+    color: #333;
+}

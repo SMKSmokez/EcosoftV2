@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/landing.css">
+    <link rel="stylesheet" href="CSS/landing.css?v=1">
     <link rel="stylesheet" href="CSS/nav.css">
-    <title>Ecosoft</title>
+    <title>ecosoft</title>
 </head>
 <body>
     <div class="page-container">
@@ -21,25 +21,25 @@
             <section class="content-row">
                 <div class="about-block titillium-web-regular">
                     <p>
-                        At Ecosoft, with our <strong class="titillium-web-semibold">31</strong> years of experience, we<br />
-                        elevate water purification to a meticulous process<br />
-                        through the implementation of state-of-the-art reverse osmosis<br />
+                        At Ecosoft, with our <strong class="titillium-web-semibold">31</strong> years of experience, we<br/>
+                        elevate water purification to a meticulous process<br/>
+                        through the implementation of state-of-the-art reverse osmosis<br/>
                         technology throughout <strong class="titillium-web-semibold">65</strong> countries.
                     </p>
                 </div>
 
                 <div class="icon-links">
                     <a href="#products" class="icon-link">
-                        <span class="icon-placeholder">[Icon]</span>
-                        <p>Products</p>
+                        <span class="landing-icon"><img src="Images/Icons/products_icon.svg" alt="Products Icon"></span>
+                        <p class="titillium-web-regular">Products</p>
                     </a>
-                    <a href="#about" class="icon-link">
-                        <span class="icon-placeholder">[Icon]</span>
-                        <p>About Us</p>
+                    <a href="about_us.php" class="icon-link">
+                        <span class="landing-icon"><img src="Images/Icons/About us - icon.svg" alt="About Us Icon"></span>
+                        <p class="titillium-web-regular">About Us</p>
                     </a>
                     <a href="#contact" class="icon-link">
-                        <span class="icon-placeholder">[Icon]</span>
-                        <p>Contact Us</p>
+                        <span class="landing-icon"><img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon"></span>
+                        <p class="titillium-web-regular">Contact Us</p>
                     </a>
                 </div>
             </section>
@@ -64,33 +64,7 @@
             </div>
         </section>
 
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="contact-info">
-                    <h3 class="titillium-web-semibold">Contact Us</h3>
-                    <p class="titillium-web-regular">Email: info@ecosoft.com</p>
-                    <p class="titillium-web-regular">Phone:  +382-67-036-993</p>
-                    <p class="titillium-web-regular">Address: 46 Rr. Nënë Tereza</p>
-                </div>
-                <div class="social-links">
-                    <h3 class="titillium-web-semibold">Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="https://instagram.com/ecosoft" target="_blank" class="social-link">
-                            <span class="social-icon">[Instagram]</span>
-                        </a>
-                        <a href="https://facebook.com/ecosoft" target="_blank" class="social-link">
-                            <span class="social-icon">[Facebook]</span>
-                        </a>
-                        <a href="https://linkedin.com/company/ecosoft" target="_blank" class="social-link">
-                            <span class="social-icon">[LinkedIn]</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="titillium-web-regular">&copy; 2025 Ecosoft. All rights reserved.</p>
-            </div>
-        </footer>
+        <?php require "footer.php";?>
     </div>
 </body>
 </html>

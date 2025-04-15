@@ -8,7 +8,7 @@
     background-color: var(--main);
     color: var(--l-text);
     padding: 0.5rem 2rem;
-    width: 100vw;
+    width: 100%;
 }
 
 .footer-content {

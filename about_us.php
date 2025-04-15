@@ -9,6 +9,7 @@
     <title>About Us - Ecosoft</title>
 </head>
 <body>
+    <?php require "navbar.php";?>
     <div class="page-container">
         <section class="about-us">
             <h1 class="titillium-web-bold">About Us</h1>

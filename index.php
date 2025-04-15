@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/landing.css?v=1">
-    <link rel="stylesheet" href="CSS/nav.css">
     <title>ecosoft</title>
 </head>
 <body>
+    <?php require "navbar.php";?>
     <div class="page-container">
         <main class="hero" id="hero">
             <section class="hero-text">
@@ -63,7 +63,6 @@
                 </div>
             </div>
         </section>
-
         <?php require "footer.php";?>
     </div>
 </body>

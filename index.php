@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/landing.css?v=1">
+    <link rel="stylesheet" href="CSS/nav.css?v=1">
     <title>ecosoft</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
                 </div>
 
                 <div class="icon-links">
-                    <a href="#products" class="icon-link">
+                    <a href="products.php" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/products_icon.svg" alt="Products Icon"></span>
                         <p class="titillium-web-regular">Products</p>
                     </a>
@@ -37,7 +38,7 @@
                         <span class="landing-icon"><img src="Images/Icons/About us - icon.svg" alt="About Us Icon"></span>
                         <p class="titillium-web-regular">About Us</p>
                     </a>
-                    <a href="#contact" class="icon-link">
+                    <a href="contact.php" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon"></span>
                         <p class="titillium-web-regular">Contact Us</p>
                     </a>

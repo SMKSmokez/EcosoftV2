@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/about_us.css?v=1">
-    <link rel="stylesheet" href="CSS/nav.css">
+    <link rel="stylesheet" href="CSS/nav.css?v=1">
     <title>About Us - Ecosoft</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
             <h1 class="titillium-web-bold">About Us</h1>
             <div class="about-section">
                 <div class="about-image">
-                    <img src="Images/about-installing-filter.jpg" alt="Person installing water filter">
+                    <img src="Images\how-to-install-who-house-water-filter-step-3.jpg" alt="Person installing water filter">
                 </div>
                 <div class="about-text">
                     <p class="titillium-web-regular">
@@ -36,12 +36,12 @@
                     </p>
                 </div>
                 <div class="about-image">
-                    <img src="Images/about-building.jpg" alt="Building at dusk">
+                    <img src="Images\ecosoft-bylding.png" alt="Building at dusk">
                 </div>
             </div>
             <div class="about-section">
                 <div class="about-image">
-                    <img src="Images/about-factory.jpg" alt="Person in factory setting">
+                    <img src="Images\image6.jpg" alt="Person in factory setting">
                 </div>
                 <div class="about-text">
                     <p class="titillium-web-regular">

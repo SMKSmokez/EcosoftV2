@@ -1,70 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/landing.css?v=1">
-    <link rel="stylesheet" href="CSS/nav.css?v=1">
-    <title>ecosoft</title>
-</head>
-<body>
-    <?php require "navbar.php";?>
-    <div class="page-container">
-        <main class="hero" id="hero">
-            <section class="hero-text">
-                <h1 class="titillium-web-bold">Water is the most important substance in our life</h1>
-                <p class="subtext titillium-web-semibold">
-                    It impacts our health, economy, environment, and where we live with our loved ones
-                </p>
-            </section>
+<?php 
 
-            <section class="content-row">
-                <div class="about-block titillium-web-regular">
-                    <p>
-                        At Ecosoft, with our <strong class="titillium-web-semibold">31</strong> years of experience, we<br/>
-                        elevate water purification to a meticulous process<br/>
-                        through the implementation of state-of-the-art reverse osmosis<br/>
-                        technology throughout <strong class="titillium-web-semibold">65</strong> countries.
-                    </p>
-                </div>
+require "func.php";
 
-                <div class="icon-links">
-                    <a href="products.php" class="icon-link">
-                        <span class="landing-icon"><img src="Images/Icons/products_icon.svg" alt="Products Icon"></span>
-                        <p class="titillium-web-regular">Products</p>
-                    </a>
-                    <a href="about_us.php" class="icon-link">
-                        <span class="landing-icon"><img src="Images/Icons/About us - icon.svg" alt="About Us Icon"></span>
-                        <p class="titillium-web-regular">About Us</p>
-                    </a>
-                    <a href="contact.php" class="icon-link">
-                        <span class="landing-icon"><img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon"></span>
-                        <p class="titillium-web-regular">Contact Us</p>
-                    </a>
-                </div>
-            </section>
-        </main>
+$routes = [
+    '/' => 'Controllers/index.php',
+    '/index' => 'Controllers/index.php',
+    '/products' => 'Controllers/products.php',
+    '/about' => 'Controllers/about.php',
+    '/survey' => 'Controllers/survey.php',
+];
 
-        <section class="filter-query">
-            <div class="filter-query-split">
-                <div class="filter-query-text">
-                    <p class="titillium-web-regular">
-                        Our company is committed to delivering exceptional performance through a sophisticated filtration system, ensuring the removal of contaminants and guaranteeing the production of high-quality, clean water for a diverse range of applications—from households to industrial use.
-                    </p>
-                    <p class="filter-query-subtext">
-                        But not all water filtration needs are the same. The right system depends on your water quality, household size, and specific needs.
-                    </p>
-                    <p class="quiz-prompt">
-                        Take our short quiz to find the perfect water filter for your home or business.
-                    </p>
-                </div>
-                <div class="filter-query-image">
-                    <a href="#quiz" class="quiz-button titillium-web-bold">Get Your Ideal Water Filter</a>
-                </div>
-            </div>
-        </section>
-        <?php require "footer.php";?>
-    </div>
-</body>
-</html>
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+
+if ($basePath && strpos($uri, $basePath) === 0) {
+    $uri = substr($uri, strlen($basePath));
+    $uri = ($uri === '' || $uri === '/') ? '' : $uri;
+}
+
+$uri = $uri ? '/' . ltrim(rtrim($uri, '/'), '/') : '/';
+
+file_put_contents('debug.log', 
+    "SCRIPT_NAME: {$_SERVER['SCRIPT_NAME']}\n" .
+    "Raw REQUEST_URI: {$_SERVER['REQUEST_URI']}\n" .
+    "Parsed URI: $uri\n" .
+    "Base Path: $basePath\n" .
+    "Available Routes: " . print_r(array_keys($routes), true) . "\n" .
+    "----------------------------------------\n",
+    FILE_APPEND
+);
+
+// Check if the URI exists in routes
+if (array_key_exists($uri, $routes)) {
+    require $routes[$uri];
+} else {
+    http_response_code(404);
+    echo "Page Not Found: $uri";
+    die();
+}
+?>

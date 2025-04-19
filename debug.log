@@ -1,0 +1,70 @@
+SCRIPT_NAME: /EcosoftV2/index.php
+Raw REQUEST_URI: /EcosoftV2/
+Parsed URI: /
+Base Path: /EcosoftV2
+Available Routes: Array
+(
+    [0] => /
+    [1] => /index
+    [2] => /products
+    [3] => /about
+    [4] => /survey
+)
+
+----------------------------------------
+SCRIPT_NAME: /EcosoftV2/index.php
+Raw REQUEST_URI: /EcosoftV2/
+Parsed URI: /
+Base Path: /EcosoftV2
+Available Routes: Array
+(
+    [0] => /
+    [1] => /index
+    [2] => /products
+    [3] => /about
+    [4] => /survey
+)
+
+----------------------------------------
+SCRIPT_NAME: /EcosoftV2/index.php
+Raw REQUEST_URI: /EcosoftV2/
+Parsed URI: /
+Base Path: /EcosoftV2
+Available Routes: Array
+(
+    [0] => /
+    [1] => /index
+    [2] => /products
+    [3] => /about
+    [4] => /survey
+)
+
+----------------------------------------
+SCRIPT_NAME: /EcosoftV2/index.php
+Raw REQUEST_URI: /EcosoftV2/
+Parsed URI: /
+Base Path: /EcosoftV2
+Available Routes: Array
+(
+    [0] => /
+    [1] => /index
+    [2] => /products
+    [3] => /about
+    [4] => EcosoftV2/survey
+)
+
+----------------------------------------
+SCRIPT_NAME: /EcosoftV2/index.php
+Raw REQUEST_URI: /EcosoftV2/
+Parsed URI: /
+Base Path: /EcosoftV2
+Available Routes: Array
+(
+    [0] => /
+    [1] => /index
+    [2] => /products
+    [3] => /about
+    [4] => /survey
+)
+
+----------------------------------------

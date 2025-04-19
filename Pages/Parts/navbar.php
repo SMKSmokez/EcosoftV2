@@ -20,10 +20,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <?php if ($currentPage == 'index.php') { ?>
+    <link rel="stylesheet" href="CSS/nav.css?v=1">
+
     <div class="navbar-wrapper">
         <nav class="navbar transparent">
             <div class="navbar-logo">
-                <img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg">
+                <a href="index"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
             </div>
             <div class="navbar-language">
                 <div class="language-selector">
@@ -44,18 +46,19 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </nav>
     </div>
 <?php } else { ?>
-    <nav class="navbar">
+    <link rel="stylesheet" href="CSS/nav.css?v=1">
+    <nav class="navbar" style="box-shadow: 0px 4px 25px 5px rgba(137, 170, 199, 1);">
         <div class="navbar-logo">
-            <img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg">
+        <a href="index"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
         </div>
         <div class="navbar-icons">
-            <a href="products.php" class="nav-icon <?php echo ($currentPage == 'products.php' ? 'active' : ''); ?>">
+            <a href="/EcosoftV2/products" class="nav-icon <?php echo ($currentPage == 'products.php' ? 'active' : ''); ?>">
                 <img src="Images/Icons/products_icon.svg" alt="Products Icon">
             </a>
-            <a href="about_us.php" class="nav-icon <?php echo ($currentPage == 'about_us.php' ? 'active' : ''); ?>">
+            <a href="/EcosoftV2/about" class="nav-icon <?php echo ($currentPage == 'about_us.php' ? 'active' : ''); ?>">
                 <img src="Images/Icons/About us - icon.svg" alt="About Us Icon">
             </a>
-            <a href="survey.php" class="nav-icon <?php echo ($currentPage == 'survey.php' ? 'active' : ''); ?>">
+            <a href="/EcosoftV2/survey" class="nav-icon <?php echo ($currentPage == 'survey.php' ? 'active' : ''); ?>">
                 <img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon">
             </a>
         </div>

@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/about_us.css?v=1">
-    <link rel="stylesheet" href="CSS/nav.css?v=1">
-    <title>About Us - Ecosoft</title>
-</head>
+<?php require "Pages/Parts/head.php"?>
 <body>
-    <?php require "navbar.php";?>
+    <?php require "Pages/Parts/navbar.php";?>
     <div class="page-container">
         <section class="about-us">
             <h1 class="titillium-web-bold">About Us</h1>
@@ -55,6 +48,6 @@
             </div>
         </section>
     </div>
-    <?php require "footer.php"?>
+    <?php require "Pages/Parts/footer.php"?>
 </body>
 </html>

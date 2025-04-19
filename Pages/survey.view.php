@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ecosoft Customer Survey</title>
-    <link rel="stylesheet" href="CSS/survey.css">
-    <link rel="stylesheet" href="CSS/nav.css">
-</head>
+<?php require "Pages/Parts/head.php"?>
 <body>
-    <?php require "navbar.php";?>
+    <?php require "Pages/Parts/navbar.php";?>
     <main class="survey-page">
         <section class="survey-section">
-            <h1 class="survey-title titillium-web-semibold">Ecosoft Customer Survey</h1>
+            <h1 class="survey-title titillium-web-semibold">Ecosoft Water Filter Survey</h1>
             <p class="survey-description titillium-web-regular">By filling out the provided survey below our team at Ecosoft can help aid you in choosing an appropriate water filtration system for your home or business.</p>
             
             <form class="survey-form">
@@ -39,20 +33,19 @@
                     </div>
                 </div>
 
-                <!-- Number of Bathrooms -->
-                <div class="form-group">
-                    <label for="bathrooms" class="titillium-web-regular">Number of Bathrooms:</label>
-                    <input type="text" id="bathrooms" class="form-input titillium-web-regular" placeholder="Number of Bathrooms">
+                <!-- Number of Bathrooms and Occupants -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bathrooms" class="titillium-web-regular">Number of Bathrooms:</label>
+                        <input type="text" id="bathrooms" class="form-input titillium-web-regular" placeholder="Number of Bathrooms">
+                    </div>
+                    <div class="form-group">
+                        <label for="occupancy" class="titillium-web-regular" data-tooltip="Number of people working or living at this location">Occupancy Count:</label>
+                        <input type="text" id="occupancy" class="form-input titillium-web-regular" placeholder="Occupancy Count">
+                    </div>
                 </div>
-
-                <!-- Occupancy Count -->
-                <div class="form-group">
-                    <label for="occupancy" class="titillium-web-regular">Occupancy Count: <span class="form-note titillium-web-light">(Enter total number of people working or living at this location)</span></label>
-                    <input type="text" id="occupancy" class="form-input titillium-web-regular" placeholder="Occupancy Count">
-                </div>
-
                 <!-- Water Source -->
-                <div class="form-group">
+                <div class="form-group centered-group">
                     <label class="titillium-web-regular">Water Source:</label>
                     <div class="checkbox-group">
                         <label class="checkbox-label titillium-web-regular">
@@ -65,17 +58,17 @@
                 </div>
 
                 <!-- Electricity Next to Water Meter -->
-                <div class="form-group">
+                <div class="form-group centered-group">
                     <label class="titillium-web-regular">Is there electricity next to your water meter?</label>
-                    <div class="radio-group">
-                        <label class="radio-label titillium-web-regular">
-                            <input type="radio" name="electricity" value="yes"> Yes
+                    <div class="checkbox-group">
+                        <label class="checkbox-label titillium-web-regular">
+                            <input type="checkbox" name="electricity" value="yes"> Yes
                         </label>
-                        <label class="radio-label titillium-web-regular">
-                            <input type="radio" name="electricity" value="no"> No
+                        <label class="checkbox-label titillium-web-regular">
+                            <input type="checkbox" name="electricity" value="no"> No
                         </label>
-                        <label class="radio-label titillium-web-regular">
-                            <input type="radio" name="electricity" value="dont-know"> Don’t Know
+                        <label class="checkbox-label titillium-web-regular">
+                            <input type="checkbox" name="electricity" value="dont-know"> Don’t Know
                         </label>
                     </div>
                 </div>
@@ -85,5 +78,6 @@
             </form>
         </section>
     </main>
+    <?php require "Pages/Parts/footer.php";?>
 </body>
 </html>

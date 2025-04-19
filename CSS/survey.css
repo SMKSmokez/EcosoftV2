@@ -36,10 +36,15 @@
     text-align: left;
 }
 
+.centered-group {
+    text-align: center;
+}
+
 .form-group label {
     display: block;
     font-size: 18px;
     margin-bottom: 0.25rem;
+    position: relative; /* For tooltip positioning */
 }
 
 .form-input {
@@ -52,25 +57,32 @@
     box-shadow: 4px 5px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
-.form-note {
-    font-size: 14px;
-    color: #666;
-}
-
-.checkbox-group, .radio-group {
+.checkbox-group {
     display: flex;
     gap: 1rem;
     margin-top: 0.5rem;
 }
 
-.checkbox-label, .radio-label {
+.centered-group .checkbox-group {
+    justify-content: center;
+}
+
+.checkbox-label {
     display: flex;
     align-items: center;
     font-size: 18px;
 }
 
-.checkbox-label input, .radio-label input {
+.checkbox-label input {
     margin-right: 0.5rem;
+}
+
+/* Custom checkbox styling for consistency */
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--ex); /* Matches border color */
+    cursor: pointer;
 }
 
 .form-group:not(:last-child) {
@@ -95,6 +107,28 @@
     color: var(--d-text);
 }
 
+/* Tooltip Styles */
+[data-tooltip] {
+    cursor: help;
+}
+
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 20%;
+    left: 10px; /* Slight offset to the right */
+    background: var(--ex);
+    color: var(--d-text);
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 12px;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 4px 5px 10px 1px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 0.5rem;
+}
+
 @media (max-width: 600px) {
     .survey-page {
         padding: 100px 1rem 1rem;
@@ -109,14 +143,20 @@
         margin-bottom: 0.5rem !important;
     }
 
-    .checkbox-group, .radio-group {
+    .checkbox-group {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; /* Center checkboxes on mobile */
         gap: 0.5rem;
     }
 
     .submit-btn {
         width: 100%;
         max-width: 300px;
+    }
+
+    [data-tooltip]:hover::after {
+        white-space: normal;
+        max-width: 200px;
+        left: 0; /* Reset offset for mobile readability */
     }
 }

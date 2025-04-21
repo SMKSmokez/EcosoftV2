@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require "Pages/Parts/head.php"?>
+<?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php"?>
 <body>
-    <?php require "Pages/Parts/navbar.php";?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php";?>
     <div class="page-container">
         <section class="about-us">
             <h1 class="titillium-web-bold">About Us</h1>

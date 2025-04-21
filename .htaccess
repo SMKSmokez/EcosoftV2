@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteRule ^$ /EcosoftV2/Controllers/index.php [L,NC]
+RewriteRule ^home$ /EcosoftV2/Controllers/index.php [L,NC]
+RewriteRule ^about$ /EcosoftV2/Controllers/about.php [L,NC]
+RewriteRule ^products$ /EcosoftV2/Controllers/products.php [L,NC]
+RewriteRule ^Products$ /EcosoftV2/Controllers/products.php [L,NC]
+RewriteRule ^survey$ /EcosoftV2/Controllers/survey.php [L,NC]

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require "Pages/Parts/head.php"?>
+<?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php"?>
 <body>
-    <?php require "Pages/Parts/navbar.php";?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php";?>
     <div class="page-container">
         <main class="hero" id="hero">
             <section class="hero-text">
@@ -23,15 +23,15 @@
                 </div>
 
                 <div class="icon-links">
-                    <a href="/EcosoftV2/products" class="icon-link">
+                    <a href="Products" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/products_icon.svg" alt="Products Icon"></span>
                         <p class="titillium-web-regular">Products</p>
                     </a>
-                    <a href="/EcosoftV2/about" class="icon-link">
+                    <a href="About" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/About us - icon.svg" alt="About Us Icon"></span>
                         <p class="titillium-web-regular">About Us</p>
                     </a>
-                    <a href="/EcosoftV2/survey" class="icon-link">
+                    <a href="Survey" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon"></span>
                         <p class="titillium-web-regular">Contact Us</p>
                     </a>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </section>
-        <?php require "Pages/Parts/footer.php";?>
+        <?php include("\\xampp\htdocs\EcosoftV2\Pages\Parts\\footer.php");?>
     </div>
 </body>
 </html>

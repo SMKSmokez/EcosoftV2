@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="<?php echo $currentLang; ?>">
-<?php require "Pages/Parts/head.php"?>
+<?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php"?>
 <body>
-    <?php require "Pages/Parts/navbar.php";?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php";?>
     <main class="products-page">
         <!-- Search Section -->
         <section class="search-section">
@@ -51,6 +51,6 @@
             </div>
         </section>
     </main>
-    <?php require "Pages/Parts/footer.php";?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/footer.php";?>
 </body>
 </html>

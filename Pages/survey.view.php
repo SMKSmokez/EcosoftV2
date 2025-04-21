@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require "Pages/Parts/head.php"?>
+<?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php"?>
 <body>
-    <?php require "Pages/Parts/navbar.php";?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php";?>
     <main class="survey-page">
         <section class="survey-section">
             <h1 class="survey-title titillium-web-semibold">Ecosoft Water Filter Survey</h1>
@@ -78,6 +78,6 @@
             </form>
         </section>
     </main>
-    <?php require "Pages/Parts/footer.php";?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/footer.php";?>
 </body>
 </html>

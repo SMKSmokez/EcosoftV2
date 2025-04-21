@@ -9,7 +9,7 @@
             <div class="search-container">
                 <input type="text" class="search-bar titillium-web-regular" placeholder="Search...">
                 <button class="filter-btn titillium-web-regular">Filter</button>
-                <a href="survey.php"><button class="survey-btn titillium-web-regular">Get Your Filter</button></a>
+                <a href="Survey"><button class="survey-btn titillium-web-regular">Get Your Filter</button></a>
             </div>
             <div class="survey-prompt">
                 <p class="survey-title titillium-web-semibold">Not sure which filter is right for you?</p>
@@ -20,34 +20,34 @@
         <!-- Product Grid -->
         <section class="product-grid">
             <div class="product-card">
-                <h3 class="product-name titillium-web-semibold">Item Name</h3>
-                <img src="Images/Filters/placeholder_filters.jpg" alt="Water Filter">
-                <p class="product-description titillium-web-regular">Item Description</p>
+                <h3 class="product-name titillium-web-semibold">Placeholder</h3>
+                <img src="Images\Placeholder.png" alt="Water Filter">
+                <p class="product-description titillium-web-regular">Placeholder Description for Placeholder Products</p>
             </div>
             <div class="product-card">
-                <h3 class="product-name titillium-web-semibold">Item Name</h3>
-                <img src="Images/Filters/placeholder_filters.jpg" alt="Water Filter">
-                <p class="product-description titillium-web-regular">Item Description</p>
+                <h3 class="product-name titillium-web-semibold">Placeholder</h3>
+                <img src="Images\Placeholder.png" alt="Water Filter">
+                <p class="product-description titillium-web-regular">Placeholder Description for Placeholder Products</p>
             </div>
             <div class="product-card">
-                <h3 class="product-name titillium-web-semibold">Item Name</h3>
-                <img src="Images/Filters/placeholder_filters.jpg" alt="Water Filter">
-                <p class="product-description titillium-web-regular">Item Description</p>
+                <h3 class="product-name titillium-web-semibold">Placeholder</h3>
+                <img src="Images\Placeholder.png" alt="Water Filter">
+                <p class="product-description titillium-web-regular">Placeholder Description for Placeholder Products</p>
             </div>
             <div class="product-card">
-                <h3 class="product-name titillium-web-semibold">Item Name</h3>
-                <img src="Images/Filters/placeholder_filters.jpg" alt="Water Filter">
-                <p class="product-description titillium-web-regular">Item Description</p>
+                <h3 class="product-name titillium-web-semibold">Placeholder</h3>
+                <img src="Images\Placeholder.png" alt="Water Filter">
+                <p class="product-description titillium-web-regular">Placeholder Description for Placeholder Products</p>
             </div>
             <div class="product-card">
-                <h3 class="product-name titillium-web-semibold">Item Name</h3>
-                <img src="Images/Filters/placeholder_filters.jpg" alt="Water Filter">
-                <p class="product-description titillium-web-regular">Item Description</p>
+                <h3 class="product-name titillium-web-semibold">Placeholder</h3>
+                <img src="Images\Placeholder.png" alt="Water Filter">
+                <p class="product-description titillium-web-regular">Placeholder Description for Placeholder Products</p>
             </div>
             <div class="product-card">
-                <h3 class="product-name titillium-web-semibold">Item Name</h3>
-                <img src="Images/Filters/placeholder_filters.jpg" alt="Water Filter">
-                <p class="product-description titillium-web-regular">Item Description</p>
+                <h3 class="product-name titillium-web-semibold">Placeholder</h3>
+                <img src="Images\Placeholder.png" alt="Water Filter">
+                <p class="product-description titillium-web-regular">Placeholder Description for Placeholder Products</p>
             </div>
         </section>
     </main>

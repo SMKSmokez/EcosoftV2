@@ -1,17 +1,17 @@
 .products-page {
     padding: 120px 2rem 2rem;
-    max-width: 1200px;
+    max-width: 12400px;
     margin: 0 auto;
 }
 
 .search-section {
     text-align: center;
-    margin-top: 2rem; /* Reduced from 2rem to match screenshot */
+    margin-top: 2rem;
 }
 
 .survey-prompt {
     max-width: 1200px;
-    margin: 1.5rem auto 0; /* Reduced from 1.5rem to match screenshot */
+    margin: 1.5rem auto 0; 
 }
 
 .survey-title {
@@ -83,7 +83,7 @@
 .product-card {
     border: 2px solid var(--ex);
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1rem 3rem;
     text-align: center;
     box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
 }

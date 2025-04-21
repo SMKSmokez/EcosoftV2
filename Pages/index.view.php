@@ -53,11 +53,11 @@
                     </p>
                 </div>
                 <div class="filter-query-image">
-                    <a href="/EcosoftV2/survey" class="quiz-button titillium-web-bold">Get Your Ideal Water Filter</a>
+                    <a href="Survey" class="quiz-button titillium-web-bold">Get Your Ideal Water Filter</a>
                 </div>
             </div>
         </section>
-        <?php include("\\xampp\htdocs\EcosoftV2\Pages\Parts\\footer.php");?>
+        <?php require "\\xampp\htdocs\EcosoftV2\Pages\Parts\\footer.php";?>
     </div>
 </body>
 </html>

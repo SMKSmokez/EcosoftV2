@@ -52,7 +52,7 @@ img {
 }
 
 body::-webkit-scrollbar {
-    width: 0.40rem;
+    width: 0.4rem;
 }
 
 body::-webkit-scrollbar-track {

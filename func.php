@@ -11,8 +11,11 @@ function dd($value){
 function urlIs($value){
     return $_SERVER['REQUEST_URI'] === $value;
 }
+ function abort() {
+    http_response_code(404);
 
-function basePath() {
-    return rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-}
+    require "Pages/404.php";
+    
+    die();
+ }
 ?>

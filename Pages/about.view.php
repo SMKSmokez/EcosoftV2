@@ -48,6 +48,6 @@
             </div>
         </section>
     </div>
-    <?php require "Pages/Parts/footer.php"?>
+    <?php require "\\xampp\htdocs\EcosoftV2\Pages\Parts\\footer.php";?>
 </body>
 </html>

@@ -45,6 +45,32 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
         </nav>
     </div>
+<?php } elseif ($currentPage == '404.php') { ?>
+    <link rel="stylesheet" href="CSS/nav.css?v=1">
+
+    <div class="navbar-wrapper">
+        <nav class="navbar transparent">
+            <div class="navbar-logo">
+                <a href="Home"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
+            </div>
+            <div class="navbar-language">
+                <div class="language-selector">
+                    <img src="<?php echo $currentFlag; ?>" alt="Current Language Flag">
+                </div>
+                <div class="language-dropdown">
+                    <a href="?lang=en" class="language-option" data-lang="en">
+                        <img src="Images/Icons/us.svg" alt="American Flag">
+                    </a>
+                    <a href="?lang=al" class="language-option" data-lang="al">
+                        <img src="Images/Icons/al.svg" alt="Albanian Flag">
+                    </a>
+                    <a href="?lang=me" class="language-option" data-lang="me">
+                        <img src="Images/Icons/me.svg" alt="Montenegro Flag">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
 <?php } else { ?>
     <link rel="stylesheet" href="CSS/nav.css?v=1">
     <nav class="navbar" style="box-shadow: 0px 4px 25px 5px rgba(137, 170, 199, 1);">
@@ -79,5 +105,5 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
     </nav>
-<?php } ?>
+<?php }?>
 <script src="JS/navbar.js"></script>

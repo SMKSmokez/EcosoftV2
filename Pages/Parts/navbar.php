@@ -4,7 +4,7 @@ if (isset($_GET['lang'])) {
     $_SESSION['lang'] = $_GET['lang'];
 }
 if (!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = 'me';
+    $_SESSION['lang'] = 'en';
 }
 
 $flagIcons = [
@@ -14,7 +14,7 @@ $flagIcons = [
 ];
 
 $currentLang = $_SESSION['lang'];
-$currentFlag = isset($flagIcons[$currentLang]) ? $flagIcons[$currentLang] : $flagIcons['me'];
+$currentFlag = isset($flagIcons[$currentLang]) ? $flagIcons[$currentLang] : $flagIcons['us'];
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
@@ -25,7 +25,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <div class="navbar-wrapper">
         <nav class="navbar transparent">
             <div class="navbar-logo">
-                <a href="Home"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
+                <a href="Home?lang=<?php echo $currentLang; ?>"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
             </div>
             <div class="navbar-language">
                 <div class="language-selector">
@@ -51,7 +51,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <div class="navbar-wrapper">
         <nav class="navbar transparent">
             <div class="navbar-logo">
-                <a href="Home"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
+                <a href="Home?lang=<?php echo $currentLang; ?>"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
             </div>
             <div class="navbar-language">
                 <div class="language-selector">
@@ -75,16 +75,16 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="CSS/nav.css?v=1">
     <nav class="navbar" style="box-shadow: 0px 4px 25px 5px rgba(137, 170, 199, 1);">
         <div class="navbar-logo">
-        <a href="Home"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
+        <a href="Home?lang=<?php echo $currentLang; ?>"><img src="Images/Logo/E_F_Logo.svg" alt="Ecosoft Montenegro Logo" class="logo-svg"></a>
         </div>
         <div class="navbar-icons">
-            <a href="Products" class="nav-icon <?php echo ($currentPage == 'products.php' ? 'active' : ''); ?>">
+            <a href="Products?lang=<?php echo $currentLang; ?>" class="nav-icon <?php echo ($currentPage == 'products.php' ? 'active' : ''); ?>">
                 <img src="Images/Icons/products_icon.svg" alt="Products Icon">
             </a>
-            <a href="About" class="nav-icon <?php echo ($currentPage == 'about.php' ? 'active' : ''); ?>">
+            <a href="About?lang=<?php echo $currentLang; ?>" class="nav-icon <?php echo ($currentPage == 'about.php' ? 'active' : ''); ?>">
                 <img src="Images/Icons/About us - icon.svg" alt="About Us Icon">
             </a>
-            <a href="Survey" class="nav-icon <?php echo ($currentPage == 'survey.php' ? 'active' : ''); ?>">
+            <a href="Survey?lang=<?php echo $currentLang; ?>" class="nav-icon <?php echo ($currentPage == 'survey.php' ? 'active' : ''); ?>">
                 <img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon">
             </a>
         </div>

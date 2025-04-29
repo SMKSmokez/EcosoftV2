@@ -46,7 +46,7 @@
     display: block;
     font-size: 18px;
     margin-bottom: 0.25rem;
-    position: relative; /* For tooltip positioning */
+    position: relative;
 }
 
 .form-input {

@@ -53,7 +53,10 @@ $text = [
 
 
 
-        
+        'filter'           => 'Filter',
+        'clear'            => 'Clear',
+        'no_products_found' => 'No products found matching your search or filter criteria.',
+        'quiz_button_products'      => 'Get Your Filter',
     ],
 
     'al' => [
@@ -98,7 +101,10 @@ $text = [
 
 
 
-
+        'filter'           => 'Filtro',
+        'clear'            => 'Pastro',
+        'no_products_found' => 'Nuk u gjetën produkte që përputhen me kriteret tuaja të kërkimit ose filtrimit.',
+        'quiz_button_products'      => 'Gjej Filtrin',
     ],
 
     'me' => [
@@ -144,6 +150,9 @@ $text = [
 
 
 
-
+        'filter'           => 'Filter',
+        'clear'            => 'Obriši',
+        'no_products_found' => 'Nijedan proizvod nije pronađen prema vašim kriterijumima pretrage ili filtriranja.',
+        'quiz_button_products'      => 'Pronađi Filter',
     ]
 ];

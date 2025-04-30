@@ -1,6 +1,7 @@
 .products-page {
     padding: 120px 2rem 2rem;
-    max-width: 12400px;
+    max-width: 1200;
+    min-height: 100vh;
     margin: 0 auto;
 }
 
@@ -63,14 +64,18 @@
 }
 
 .filter-dropdown {
+    display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 100%; /* Keep it below the button */
+    left: 50%; /* Position the left edge at 50% of the button's width */
+    transform: translateX(-50%); /* Shift it left by 50% of its own width to center it */
     background: var(--background);
     border: 2px solid #89aac7;
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 100;
+    width: 200px;
+    overflow: hidden;
 }
 
 .filter-option {
@@ -82,6 +87,22 @@
 
 .filter-option:hover {
     background-color: #f0f0f0;
+}
+
+.filter-option.selected {
+    background-color: #89aac7;
+    color: #fff;
+    font-weight: bold;
+}
+
+.clear-filter {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: var(--d-text);
+}
+
+.clear-filter:hover {
+    background-color: #e0e0e0;
 }
 
 .survey-btn {
@@ -105,6 +126,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 4rem;
+    max-width: 85%;
+    margin: 2rem auto 0;
 }
 
 .product-card {

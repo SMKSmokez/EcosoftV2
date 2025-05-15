@@ -16,22 +16,74 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Handle selecting filter keywords
+const searchInput = document.querySelector('.search-bar');
+const productGrid = document.querySelector('.product-grid');
 const filterLinks = document.querySelectorAll('.filter-option');
+
+let currentFilter = new URLSearchParams(window.location.search).get('filter') || '';
+
+function fetchProductsHTML(search = '', filter = '') {
+    const params = new URLSearchParams();
+    if (search) params.set('search', search);
+    if (filter) params.set('filter', filter);
+
+    fetch(`?${params.toString()}`, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'  // Mark as AJAX request
+        }
+    })
+    .then(res => res.text())
+    .then(html => {
+        productGrid.innerHTML = html;
+        updateURL(search, filter);
+    })
+    .catch(err => console.error('Error fetching products:', err));
+}
+
+function updateURL(search, filter) {
+    const params = new URLSearchParams();
+    if (search) params.set('search', search);
+    if (filter) params.set('filter', filter);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    history.pushState(null, '', newUrl);
+}
+
+// Debounced search input listener
+let debounceTimer = null;
+if (searchInput) {
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim();
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            fetchProductsHTML(query, currentFilter);
+        }, 300);
+    });
+}
+
+// Filter link click handler
 filterLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', (e) => {
         e.preventDefault();
-        const selectedFilter = link.textContent.trim();
-        link.classList.toggle('selected');  // Toggle selected class on click
-        updateFilter(selectedFilter);  // Update the filter logic (not yet implemented in the snippet)
+        const url = new URL(link.href);
+        currentFilter = url.searchParams.get('filter') || '';
+
+        // Update selected UI
+        filterLinks.forEach(l => l.classList.remove('selected'));
+        link.classList.add('selected');
+
+        const query = searchInput?.value.trim() || '';
+        fetchProductsHTML(query, currentFilter);
     });
 });
 
-// Clear filter functionality
-document.querySelector('.clear-filter').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Clear selected filters and reset display (handle reset in updateFilter or similar)
-    filterLinks.forEach(link => link.classList.remove('selected'));
-    window.location.href = '?lang=<?php echo $currentLang; ?>';  // Redirect to the page without any filter
+// Handle browser back/forward buttons
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get('search') || '';
+    const filter = params.get('filter') || '';
+    if (searchInput) searchInput.value = search;
+    currentFilter = filter;
+    fetchProductsHTML(search, filter);
 });
+
 

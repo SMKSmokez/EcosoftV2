@@ -169,6 +169,7 @@ body::-webkit-scrollbar-thumb {
 
 .language-dropdown {
     visibility: hidden;
+    pointer-events: none;
     position: absolute;
     top: 100%;
     left: 50%;
@@ -187,6 +188,7 @@ body::-webkit-scrollbar-thumb {
 
 .language-dropdown.active {
     visibility: visible;
+    pointer-events: all;
     opacity: 1;
     transform: translateX(-50%) translateY(0);
     min-height: 0;

@@ -51,6 +51,15 @@ $text = [
         'no' => 'No',
         'dont_know' => 'Don’t Know',
 
+        'error_first_name' => 'First name is required.',
+        'error_last_name' => 'Last name is required.',
+        'error_phone_number' => 'Phone number is required.',
+        'error_address' => 'Address is required.',
+        'error_bathrooms' => 'Please specify the number of bathrooms.',
+        'error_occupancy' => 'Occupancy count is required.',
+        'error_water_source' => 'Please select a water source.',
+        'error_electricity' => 'Please indicate if electricity is available near your water meter.',
+
 
 
         'filter'           => 'Filter',
@@ -98,6 +107,15 @@ $text = [
         'yes' => 'Po',
         'no' => 'Jo',
         'dont_know' => 'Nuk E Di',
+
+        'error_first_name' => 'Ju lutem shkruani emrin.',
+        'error_last_name' => 'Ju lutem shkruani mbiemrin.',
+        'error_phone_number' => 'Ju lutem shkruani numrin e telefonit.',
+        'error_address' => 'Ju lutem shkruani adresën.',
+        'error_bathrooms' => 'Ju lutem shkruani numrin e banjove.',
+        'error_occupancy' => 'Ju lutem shkruani numrin e pjesëmarrësve.',
+        'error_water_source' => 'Ju lutem zgjidhni një burim uji.',
+        'error_electricity' => 'Ju lutem tregoni nëse ka energji elektrike pranë matësit të ujit.',
 
 
 
@@ -147,6 +165,15 @@ $text = [
         'yes' => 'Da',
         'no' => 'Ne',
         'dont_know' => 'Ne Znam',
+
+        'error_first_name' => 'Unesite ime.',
+        'error_last_name' => 'Unesite prezime.',
+        'error_phone_number' => 'Unesite broj telefona.',
+        'error_address' => 'Unesite adresu.',
+        'error_bathrooms' => 'Unesite broj kupaonica.',
+        'error_occupancy' => 'Unesite broj osoba.',
+        'error_water_source' => 'Izaberite izvor vode.',
+        'error_electricity' => 'Naznačite da li postoji električna energija pored vašeg vodomera.',
 
 
 

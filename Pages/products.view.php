@@ -45,6 +45,27 @@ if (!empty($filterKeyword)) {
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$isAjax = (
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+);
+
+if ($isAjax) {
+    // Return only the product grid HTML
+    if (count($products) > 0) {
+        foreach ($products as $product) {
+            echo '<div class="product-card">';
+            echo '<h3 class="product-name titillium-web-semibold">' . htmlspecialchars($product['name']) . '</h3>';
+            echo '<img src="' . htmlspecialchars($product['image_url']) . '" alt="Water Filter">';
+            echo '<p class="product-description titillium-web-regular">' . htmlspecialchars($product['description']) . '</p>';
+            echo '</div>';
+        }
+    } else {
+        echo '<p class="titillium-web-semibold" style="text-align: center; grid-column: 1 / -1; font-size: 21px;">' . htmlspecialchars($text[$currentLang]['no_products_found']) . '</p>';
+    }    
+    exit;
+}
 ?>
 
 <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php"; ?>
@@ -74,8 +95,15 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </a>
                             <?php endforeach; ?>
                         </div>
+                        <?phpW
+                            $queryParams = $_GET;
+                            unset($queryParams['filter']);
+                            $queryString = http_build_query($queryParams);
+                        ?>
                         <div class="clear-filter-wrapper">
-                            <a href="?lang=<?php echo $currentLang; ?>" class="filter-option clear-filter"><?php echo htmlspecialchars($text[$currentLang]['clear']); ?></a>
+                            <a href="?<?php echo htmlspecialchars($queryString); ?>" class="filter-option clear-filter">
+                                <?php echo htmlspecialchars($text[$currentLang]['clear']); ?>
+                            </a>
                         </div>
                     </div>
                     <input type="hidden" name="lang" value="<?php echo $currentLang; ?>">
@@ -96,7 +124,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($products as $product): ?>
                     <div class="product-card">
                         <h3 class="product-name titillium-web-semibold"><?php echo htmlspecialchars($product['name']); ?></h3>
-                        <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="Water Filter">
+                        <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="Water Filter" loading="lazy">
                         <p class="product-description titillium-web-regular"><?php echo htmlspecialchars($product['description']); ?></p>
                     </div>
                 <?php endforeach; ?>

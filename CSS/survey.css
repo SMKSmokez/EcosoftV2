@@ -59,6 +59,14 @@
     box-shadow: 4px 5px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    display: block;
+}
+
+
 .checkbox-group {
     display: flex;
     gap: 1rem;

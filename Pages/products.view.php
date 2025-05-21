@@ -1,18 +1,14 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/Parts/lang.php'; // Use relative path
-require_once __DIR__ . '/../config.php';  // Assuming config.php is one folder up from Pages
+require_once __DIR__ . '/Parts/lang.php';
+require_once __DIR__ . '/../config.php';
 
-// $lang should be set inside lang.php, use it as current language
 $currentLang = $lang;
+$langSuffix = $currentLang;
 
-// Get and sanitize inputs
-$searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
-$filterKeyword = isset($_GET['filter']) ? trim($_GET['filter']) : '';
-
-// Fetch all products and extract unique keywords
-$keywordsQuery = "SELECT keywords FROM products";
+// Fetch keywords for filter dropdown in the selected language
+$keywordsQuery = "SELECT keywords_{$langSuffix} AS keywords FROM products";
 $keywordsStmt = $pdo->prepare($keywordsQuery);
 $keywordsStmt->execute();
 $keywordsArray = $keywordsStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,17 +24,23 @@ foreach ($keywordsArray as $row) {
     }
 }
 
-// Build SQL query with parameters
-$sql = "SELECT * FROM products WHERE 1=1";
+// Build SQL query with language-specific columns
+$sql = "SELECT id, name, image_url, 
+        description_{$langSuffix} AS description, 
+        keywords_{$langSuffix} AS keywords
+        FROM products WHERE 1=1";
+
 $params = [];
 
-if (!empty($searchQuery)) {
-    $sql .= " AND (name LIKE :search OR description LIKE :search)";
+if (!empty($searchQuery = (isset($_GET['search']) ? trim($_GET['search']) : ''))) {
+    // Search in name or language-specific description
+    $sql .= " AND (name LIKE :search OR description_{$langSuffix} LIKE :search)";
     $params[':search'] = '%' . $searchQuery . '%';
 }
 
-if (!empty($filterKeyword)) {
-    $sql .= " AND keywords LIKE :filter";
+if (!empty($filterKeyword = (isset($_GET['filter']) ? trim($_GET['filter']) : ''))) {
+    // Filter by language-specific keywords
+    $sql .= " AND keywords_{$langSuffix} LIKE :filter";
     $params[':filter'] = '%' . $filterKeyword . '%';
 }
 
@@ -46,9 +48,9 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Check if AJAX request (for partial product grid update)
+// Check if AJAX request
 $isAjax = (
-    isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
 );
 
@@ -79,7 +81,7 @@ if ($isAjax) {
             <div class="search-container">
                 <!-- Search Form -->
                 <form method="GET" action="" class="search-form" style="display: inline-block;">
-                    <input type="text" name="search" class="search-bar titillium-web-regular" placeholder="Search..." value="<?php echo htmlspecialchars($searchQuery); ?>">
+                    <input type="text" name="search" class="search-bar titillium-web-regular" placeholder="Search..." value="<?php echo htmlspecialchars($searchQuery ?? ''); ?>">
                     <input type="hidden" name="lang" value="<?php echo htmlspecialchars($currentLang); ?>">
                     <button type="submit" style="display: none;">Search</button> <!-- Hidden submit button -->
                 </form>
@@ -91,7 +93,7 @@ if ($isAjax) {
                         <div class="filter-options">
                             <?php foreach ($uniqueKeywords as $keyword): ?>
                                 <a href="?filter=<?php echo urlencode($keyword); ?>&lang=<?php echo htmlspecialchars($currentLang); ?>" 
-                                   class="filter-option <?php echo (strtolower($filterKeyword) === strtolower($keyword)) ? 'selected' : ''; ?>">
+                                   class="filter-option <?php echo (strtolower($filterKeyword ?? '') === strtolower($keyword)) ? 'selected' : ''; ?>">
                                     <?php echo htmlspecialchars(ucwords($keyword)); ?>
                                 </a>
                             <?php endforeach; ?>

@@ -60,7 +60,10 @@ $text = [
         'error_water_source' => 'Please select a water source.',
         'error_electricity' => 'Please indicate if electricity is available near your water meter.',
 
-
+        'survey_success' => 'Your survey has been submitted successfully!',
+        'order_id' => 'Order ID:',
+        'order_id_hint' => 'Click to copy',
+        'please_copy' => 'Please write it down or copy it for your reference.',
 
         'filter'           => 'Filter',
         'clear'            => 'Clear',
@@ -117,7 +120,10 @@ $text = [
         'error_water_source' => 'Ju lutem zgjidhni një burim uji.',
         'error_electricity' => 'Ju lutem tregoni nëse ka energji elektrike pranë matësit të ujit.',
 
-
+        'survey_success' => 'Pyetësori juaj është dorëzuar me sukses!',
+        'order_id' => 'ID e Porosisë:',
+        'order_id_hint' => 'Kliko për të kopjuar',
+        'please_copy' => 'Ju lutemi shkruajeni ose kopjoni për referencë.',
 
         'filter'           => 'Filtro',
         'clear'            => 'Pastro',
@@ -175,7 +181,10 @@ $text = [
         'error_water_source' => 'Izaberite izvor vode.',
         'error_electricity' => 'Naznačite da li postoji električna energija pored vašeg vodomera.',
 
-
+        'survey_success' => 'Vaša anketa je uspješno poslata!',
+        'order_id' => 'ID narudžbe:',
+        'order_id_hint' => 'Kliknite da kopirate',
+        'please_copy' => 'Molimo vas da ga zapišete ili kopirate za svoju evidenciju.',
 
         'filter'           => 'Filter',
         'clear'            => 'Obriši',

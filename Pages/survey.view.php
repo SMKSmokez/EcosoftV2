@@ -12,21 +12,14 @@ require_once __DIR__ . '/Parts/lang.php';
 $submissionSuccess = false;
 $orderId = null;
 $errorMessage = "";
+$errors = [];
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if we have success message from session (after redirect)
-if (isset($_SESSION['success']) && $_SESSION['success'] === true) {
-    $submissionSuccess = true;
-    $orderId = $_SESSION['order_id'] ?? null;
-    // Clear only the success flags, NOT the form data, so inputs stay filled
-    unset($_SESSION['success'], $_SESSION['order_id']);
-}
-
-// Load saved form data from session if available (after redirect or error)
-$formData = $_SESSION['form_data'] ?? [
+// Initialize formData with empty defaults to avoid warnings
+$formData = [
     'first-name' => '',
     'last-name' => '',
     'phone-number' => '',
@@ -37,39 +30,81 @@ $formData = $_SESSION['form_data'] ?? [
     'electricity' => [],
 ];
 
-// Do NOT clear form data here — keep it persistent
-// unset($_SESSION['form_data']);
+// If there is saved form data from previous failed submission, load it
+if (isset($_SESSION['form_data'])) {
+    $formData = $_SESSION['form_data'];
+}
+
+// Handle successful submission flash message
+if (isset($_SESSION['success']) && $_SESSION['success'] === true) {
+    $submissionSuccess = true;
+    $orderId = $_SESSION['order_id'] ?? null;
+    unset($_SESSION['success'], $_SESSION['order_id']);
+    // Clear form data after success so form resets on page reload
+    unset($_SESSION['form_data']);
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Get submitted values
-    $firstName = $_POST["first-name"] ?? '';
-    $lastName = $_POST["last-name"] ?? '';
-    $phoneNumber = $_POST["phone-number"] ?? '';
-    $address = $_POST["address"] ?? '';
-    $bathrooms = $_POST["bathrooms"] ?? '';
-    $occupancy = $_POST["occupancy"] ?? '';
+    $firstName = trim($_POST["first-name"] ?? '');
+    $lastName = trim($_POST["last-name"] ?? '');
+    $phoneNumber = trim($_POST["phone-number"] ?? '');
+    $address = trim($_POST["address"] ?? '');
+    $bathrooms = trim($_POST["bathrooms"] ?? '');
+    $occupancy = trim($_POST["occupancy"] ?? '');
     $waterSourceArray = $_POST["water-source"] ?? [];
     $electricityArray = $_POST["electricity"] ?? [];
 
-    // Save raw form data in session to preserve after redirect or errors
-    $_SESSION['form_data'] = [
-        'first-name' => $firstName,
-        'last-name' => $lastName,
-        'phone-number' => $phoneNumber,
-        'address' => $address,
-        'bathrooms' => $bathrooms,
-        'occupancy' => $occupancy,
-        'water-source' => $waterSourceArray,
-        'electricity' => $electricityArray,
-    ];
+    // Validate inputs and fill errors
+    if (empty($firstName)) {
+        $errors['first-name'] = $text[$lang]['error_first_name'];
+    }
+    if (empty($lastName)) {
+        $errors['last-name'] = $text[$lang]['error_last_name'];
+    }
+    if (empty($phoneNumber)) {
+        $errors['phone-number'] = $text[$lang]['error_phone_number'];
+    }
+    if (empty($address)) {
+        $errors['address'] = $text[$lang]['error_address'];
+    }
+    if (empty($bathrooms)) {
+        $errors['bathrooms'] = $text[$lang]['error_bathrooms'];
+    }
+    if (empty($occupancy)) {
+        $errors['occupancy'] = $text[$lang]['error_occupancy'];
+    }
+    if (empty($waterSourceArray)) {
+        $errors['water-source'] = $text[$lang]['error_water_source'];
+    }
+    if (empty($electricityArray)) {
+        $errors['electricity'] = $text[$lang]['error_electricity'];
+    }
 
-    // Prepare strings for email
-    $waterSource = !empty($waterSourceArray) ? ucwords(implode(', ', $waterSourceArray)) : '';
-    $electricity = !empty($electricityArray) ? ucwords(implode(', ', $electricityArray)) : '';
+    if (!empty($errors)) {
+        // Save submitted data so form fields are prefilled after errors
+        $_SESSION['form_data'] = [
+            'first-name' => $firstName,
+            'last-name' => $lastName,
+            'phone-number' => $phoneNumber,
+            'address' => $address,
+            'bathrooms' => $bathrooms,
+            'occupancy' => $occupancy,
+            'water-source' => $waterSourceArray,
+            'electricity' => $electricityArray,
+        ];
+        // Update local formData variable so form shows latest submitted data
+        $formData = $_SESSION['form_data'];
+    } else {
+        // No validation errors - process form and send mail
 
-    $orderId = uniqid();
-    $emailSubject = "$firstName $lastName Water Filter Order ID:$orderId";
-    $emailBody = <<<EOD
+        $orderId = 'ORD-' . strtoupper(bin2hex(random_bytes(4)));
+        $emailSubject = "$firstName $lastName Water Filter TEST ORDER ID:$orderId";
+
+        $waterSourceStr = ucwords(implode(', ', $waterSourceArray));
+        $electricityStr = ucwords(implode(', ', $electricityArray));
+
+        $emailBody = <<<EOD
+TEST ORDER
 Order ID: $orderId
 
 Name: $firstName $lastName
@@ -77,45 +112,64 @@ Address: $address
 Phone Number: $phoneNumber
 Bathrooms: $bathrooms
 Occupancy Count: $occupancy
-Water Source: $waterSource
-Electricity: $electricity
+Water Source: $waterSourceStr
+Electricity: $electricityStr
 EOD;
 
-    $mail = new PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'boygamez063+ecol@gmail.com';
-        $mail->Password   = 'uhti fqqs bmfs mszb';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.hostinger.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@ecosoftmne.com';
+            $mail->Password   = '//,|5Sr2OL`-iSe\Ustc^0l32VN';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
 
-        $mail->setFrom('no-reply@ecosoft.local', 'Ecosoft Survey');
-        $mail->addAddress('boygamez063@gmail.com');
+            $mail->setFrom('no-reply@ecosoftmne.com', 'Ecosoft Survey');
+            $mail->addAddress('ecosoftmne@gmail.com');
 
-        $mail->Subject = $emailSubject;
-        $mail->Body    = $emailBody;
-        $mail->CharSet = 'UTF-8';
+            $mail->Subject = $emailSubject;
+            $mail->Body    = $emailBody;
+            $mail->CharSet = 'UTF-8';
 
-        $mail->send();
+            $mail->send();
 
-        // Do NOT clear saved form data on success so fields stay filled
-        // unset($_SESSION['form_data']); // <-- Removed this line
+            // Save success state and form data to session
+            $_SESSION['success'] = true;
+            $_SESSION['order_id'] = $orderId;
+            $_SESSION['form_data'] = [
+                'first-name' => $firstName,
+                'last-name' => $lastName,
+                'phone-number' => $phoneNumber,
+                'address' => $address,
+                'bathrooms' => $bathrooms,
+                'occupancy' => $occupancy,
+                'water-source' => $waterSourceArray,
+                'electricity' => $electricityArray,
+            ];
 
-        // Set success flash message in session
-        $_SESSION['success'] = true;
-        $_SESSION['order_id'] = $orderId;
-
-        // Redirect to /Survey to avoid resubmission on reload and keep CSS intact
-        header("Location: Survey");
-        exit;
-    } catch (Exception $e) {
-        $errorMessage = "Sorry, your submission could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        // $formData is already set from session, so form stays filled on error
+            header("Location: Survey");
+            exit;
+        } catch (Exception $e) {
+            $errorMessage = "Sorry, your submission could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            // Save form data in session so user does not lose input
+            $_SESSION['form_data'] = [
+                'first-name' => $firstName,
+                'last-name' => $lastName,
+                'phone-number' => $phoneNumber,
+                'address' => $address,
+                'bathrooms' => $bathrooms,
+                'occupancy' => $occupancy,
+                'water-source' => $waterSourceArray,
+                'electricity' => $electricityArray,
+            ];
+            $formData = $_SESSION['form_data'];
+        }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="<?php echo htmlspecialchars($lang); ?>">
@@ -130,13 +184,13 @@ EOD;
 
             <?php if ($submissionSuccess && $orderId): ?>
                 <p style="color: green; font-size: 18px;">
-                    Your survey has been submitted successfully!<br>
-                    <strong>Order ID: 
-                      <code id="orderId" style="cursor:pointer; user-select: all;" title="Click to copy">
+                    <?php echo htmlspecialchars($text[$lang]['survey_success']); ?><br>
+                    <strong><?php echo htmlspecialchars($text[$lang]['order_id']); ?>
+                      <code id="orderId" style="cursor:pointer; user-select: all;" title="<?php echo htmlspecialchars($text[$lang]['order_id_hint']); ?>">
                         <?php echo htmlspecialchars($orderId); ?>
                       </code>
                     </strong><br>
-                    Please write it down or copy it for your reference.
+                    <?php echo htmlspecialchars($text[$lang]['please_copy']); ?>
                 </p>
             <?php elseif ($errorMessage): ?>
                 <p style="color: red; font-size: 18px;"><?php echo htmlspecialchars($errorMessage); ?></p>
@@ -147,13 +201,19 @@ EOD;
                 <div class="form-row">
                     <div class="form-group">
                         <label for="first-name"><?php echo htmlspecialchars($text[$lang]['first_name']); ?>:</label>
-                        <input type="text" name="first-name" id="first-name" class="form-input" required
-                        value="<?php echo htmlspecialchars($formData['first-name']); ?>">
+                        <input type="text" name="first-name" id="first-name" class="form-input"
+                               value="<?php echo htmlspecialchars($formData['first-name']); ?>">
+                        <?php if (!empty($errors['first-name'])): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($errors['first-name']); ?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="form-group">
                         <label for="last-name"><?php echo htmlspecialchars($text[$lang]['last_name']); ?>:</label>
-                        <input type="text" name="last-name" id="last-name" class="form-input" required
-                        value="<?php echo htmlspecialchars($formData['last-name']); ?>">
+                        <input type="text" name="last-name" id="last-name" class="form-input"
+                               value="<?php echo htmlspecialchars($formData['last-name']); ?>">
+                        <?php if (!empty($errors['last-name'])): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($errors['last-name']); ?></p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -161,13 +221,19 @@ EOD;
                 <div class="form-row">
                     <div class="form-group">
                         <label for="phone-number"><?php echo htmlspecialchars($text[$lang]['phone_number']); ?>:</label>
-                        <input type="text" name="phone-number" id="phone-number" class="form-input" required
-                        value="<?php echo htmlspecialchars($formData['phone-number']); ?>">
+                        <input type="text" name="phone-number" id="phone-number" class="form-input"
+                               value="<?php echo htmlspecialchars($formData['phone-number']); ?>">
+                        <?php if (!empty($errors['phone-number'])): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($errors['phone-number']); ?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="form-group">
                         <label for="address"><?php echo htmlspecialchars($text[$lang]['address']); ?>:</label>
-                        <input type="text" name="address" id="address" class="form-input" required
-                        value="<?php echo htmlspecialchars($formData['address']); ?>">
+                        <input type="text" name="address" id="address" class="form-input"
+                               value="<?php echo htmlspecialchars($formData['address']); ?>">
+                        <?php if (!empty($errors['address'])): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($errors['address']); ?></p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -175,13 +241,19 @@ EOD;
                 <div class="form-row">
                     <div class="form-group">
                         <label for="bathrooms"><?php echo htmlspecialchars($text[$lang]['bathrooms']); ?>:</label>
-                        <input type="text" name="bathrooms" id="bathrooms" class="form-input" required
-                        value="<?php echo htmlspecialchars($formData['bathrooms']); ?>">
+                        <input type="text" name="bathrooms" id="bathrooms" class="form-input"
+                               value="<?php echo htmlspecialchars($formData['bathrooms']); ?>">
+                        <?php if (!empty($errors['bathrooms'])): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($errors['bathrooms']); ?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="form-group">
                         <label for="occupancy" title="<?php echo htmlspecialchars($text[$lang]['occupancy_tooltip']); ?>"><?php echo htmlspecialchars($text[$lang]['occupancy']); ?>:</label>
-                        <input type="text" name="occupancy" id="occupancy" class="form-input" required
-                        value="<?php echo htmlspecialchars($formData['occupancy']); ?>">
+                        <input type="text" name="occupancy" id="occupancy" class="form-input"
+                               value="<?php echo htmlspecialchars($formData['occupancy']); ?>">
+                        <?php if (!empty($errors['occupancy'])): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($errors['occupancy']); ?></p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -191,16 +263,21 @@ EOD;
                     <div class="checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" name="water-source[]" value="well"
-                            <?php echo in_array('well', $formData['water-source']) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($text[$lang]['well']); ?>
+                                <?php echo in_array('well', (array)$formData['water-source']) ? 'checked' : ''; ?>>
+                            <?php echo htmlspecialchars($text[$lang]['well']); ?>
                         </label>
                         <label class="checkbox-label">
                             <input type="checkbox" name="water-source[]" value="municipal"
-                            <?php echo in_array('municipal', $formData['water-source']) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($text[$lang]['municipal']); ?>
+                                <?php echo in_array('municipal', (array)$formData['water-source']) ? 'checked' : ''; ?>>
+                            <?php echo htmlspecialchars($text[$lang]['municipal']); ?>
                         </label>
                     </div>
+                    <?php if (!empty($errors['water-source'])): ?>
+                        <p class="error-message"><?php echo htmlspecialchars($errors['water-source']); ?></p>
+                    <?php endif; ?>
                 </div>
 
-                <!-- Electricity (only one selectable) -->
+                <!-- Electricity -->
                 <div class="form-group centered-group">
                     <label><?php echo htmlspecialchars($text[$lang]['electricity']); ?></label>
                     <div class="checkbox-group" id="electricity-group">
@@ -213,10 +290,13 @@ EOD;
                             <?php echo in_array('no', $formData['electricity']) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($text[$lang]['no']); ?>
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="electricity[]" value="dont-know"
-                            <?php echo in_array('dont-know', $formData['electricity']) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($text[$lang]['dont_know']); ?>
+                            <input type="checkbox" name="electricity[]" value="dont_know"
+                            <?php echo in_array('dont_know', $formData['electricity']) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($text[$lang]['dont_know']); ?>
                         </label>
                     </div>
+                    <?php if (!empty($errors['electricity'])): ?>
+                        <p class="error-message"><?php echo htmlspecialchars($errors['electricity']); ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Submit -->
@@ -228,31 +308,28 @@ EOD;
 </div>
 
 <script>
-    // JS to make electricity checkboxes behave like radio buttons (only one selected)
+    // Electricity checkbox logic (like radio buttons)
     document.querySelectorAll('#electricity-group input[type="checkbox"]').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             if (this.checked) {
-                // Uncheck all other checkboxes
                 document.querySelectorAll('#electricity-group input[type="checkbox"]').forEach(function(box) {
-                    if (box !== checkbox) {
-                        box.checked = false;
-                    }
+                    if (box !== checkbox) box.checked = false;
                 });
             }
         });
     });
-    //JS for Order ID Copying
+
+    // Order ID copy
     document.getElementById('orderId')?.addEventListener('click', function() {
         const orderIdText = this.textContent;
         navigator.clipboard.writeText(orderIdText).then(() => {
-          const originalTitle = this.title;
-          this.title = 'Copied!';
-          setTimeout(() => { this.title = originalTitle; }, 1500);
-        }).catch(err => {
-          alert('Failed to copy order ID. Please copy manually.');
+            const originalTitle = this.title;
+            this.title = 'Copied!';
+            setTimeout(() => { this.title = originalTitle; }, 1500);
+        }).catch(() => {
+            alert('Failed to copy order ID. Please copy manually.');
         });
     });
 </script>
-
 </body>
 </html>

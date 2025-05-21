@@ -1,9 +1,9 @@
-<?php require_once "\\xampp\htdocs\EcosoftV2\Pages/Parts/lang.php"; ?>
+<?php require_once __DIR__ . '/Parts/lang.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php";?>
+<?php require __DIR__ . '/Parts/head.php'; ?>
 <body>
-    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php"; ?>
+    <?php require __DIR__ . '/Parts/navbar.php'; ?>
     <div class="page-container">
         <main class="hero" id="hero">
             <section class="hero-text">
@@ -19,15 +19,15 @@
                 </div>
 
                 <div class="icon-links">
-                    <a href="Products?lang=<?php echo $currentLang; ?>" class="icon-link">
+                    <a href="Products<?php echo '?lang=' . urlencode($lang); ?>" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/products_icon.svg" alt="Products Icon"></span>
                         <p class="titillium-web-regular"><?php echo $text[$lang]['products']; ?></p>
                     </a>
-                    <a href="About?lang=<?php echo $currentLang; ?>" class="icon-link">
+                    <a href="About<?php echo '?lang=' . urlencode($lang); ?>" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/About us - icon.svg" alt="About Us Icon"></span>
                         <p class="titillium-web-regular"><?php echo $text[$lang]['about']; ?></p>
                     </a>
-                    <a href="Survey?lang=<?php echo $currentLang; ?>" class="icon-link">
+                    <a href="Survey<?php echo '?lang=' . urlencode($lang); ?>" class="icon-link">
                         <span class="landing-icon"><img src="Images/Icons/contact-icon.svg" alt="Contact Us Icon"></span>
                         <p class="titillium-web-regular"><?php echo $text[$lang]['contact']; ?></p>
                     </a>
@@ -49,12 +49,11 @@
                     </p>
                 </div>
                 <div class="filter-query-image">
-                    <a href="Survey?lang=<?php echo $currentLang; ?>" class="quiz-button titillium-web-bold"><?php echo $text[$lang]['quiz_button']; ?></a>
+                    <a href="Survey<?php echo '?lang=' . urlencode($lang); ?>" class="quiz-button titillium-web-bold"><?php echo $text[$lang]['quiz_button']; ?></a>
                 </div>
             </div>
         </section>
-
-        <?php require "\\xampp\htdocs\EcosoftV2\Pages\Parts\\footer.php"; ?>
+        <?php require __DIR__ . '/Parts/footer.php'; ?>
     </div>
 </body>
 </html>

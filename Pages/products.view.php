@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html lang="<?php echo $currentLang; ?>">
 <?php
 session_start();
-require "\\xampp\htdocs\EcosoftV2\Pages\Parts\lang.php"; // Include lang.php to get $text and $lang
-require "\\xampp\htdocs\EcosoftV2\config.php";
 
-$currentLang = $lang; // Use $lang from lang.php (which is set to $_SESSION['lang'])
+require_once __DIR__ . '/Parts/lang.php'; // Use relative path
+require_once __DIR__ . '/../config.php';  // Assuming config.php is one folder up from Pages
 
+// $lang should be set inside lang.php, use it as current language
+$currentLang = $lang;
+
+// Get and sanitize inputs
 $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
 $filterKeyword = isset($_GET['filter']) ? trim($_GET['filter']) : '';
 
-// Fetch all products and gather unique keywords
+// Fetch all products and extract unique keywords
 $keywordsQuery = "SELECT keywords FROM products";
 $keywordsStmt = $pdo->prepare($keywordsQuery);
 $keywordsStmt->execute();
 $keywordsArray = $keywordsStmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Create an array to store unique keywords
 $uniqueKeywords = [];
 foreach ($keywordsArray as $row) {
     $keywords = explode(',', $row['keywords']);
     foreach ($keywords as $keyword) {
         $trimmedKeyword = trim($keyword);
-        if (!in_array($trimmedKeyword, $uniqueKeywords)) {
+        if ($trimmedKeyword !== '' && !in_array($trimmedKeyword, $uniqueKeywords)) {
             $uniqueKeywords[] = $trimmedKeyword;
         }
     }
 }
 
-// Prepare the SQL query to filter products based on search and selected keyword
-$sql = "SELECT * FROM products WHERE 1=1"; // Base query
+// Build SQL query with parameters
+$sql = "SELECT * FROM products WHERE 1=1";
 $params = [];
 
 if (!empty($searchQuery)) {
@@ -46,13 +46,13 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Check if AJAX request (for partial product grid update)
 $isAjax = (
     isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
 );
 
 if ($isAjax) {
-    // Return only the product grid HTML
     if (count($products) > 0) {
         foreach ($products as $product) {
             echo '<div class="product-card">';
@@ -63,14 +63,16 @@ if ($isAjax) {
         }
     } else {
         echo '<p class="titillium-web-semibold" style="text-align: center; grid-column: 1 / -1; font-size: 21px;">' . htmlspecialchars($text[$currentLang]['no_products_found']) . '</p>';
-    }    
+    }
     exit;
 }
 ?>
 
-<?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/head.php"; ?>
+<!DOCTYPE html>
+<html lang="<?php echo htmlspecialchars($currentLang); ?>">
+<?php require __DIR__ . '/Parts/head.php'; ?>
 <body>
-    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php"; ?>
+    <?php require __DIR__ . '/Parts/navbar.php'; ?>
     <main class="products-page">
         <!-- Search Section -->
         <section class="search-section">
@@ -78,24 +80,23 @@ if ($isAjax) {
                 <!-- Search Form -->
                 <form method="GET" action="" class="search-form" style="display: inline-block;">
                     <input type="text" name="search" class="search-bar titillium-web-regular" placeholder="Search..." value="<?php echo htmlspecialchars($searchQuery); ?>">
-                    <input type="hidden" name="lang" value="<?php echo $currentLang; ?>">
-                    <button type="submit" style="display: none;">Search</button> <!-- Hidden submit button; search on enter -->
+                    <input type="hidden" name="lang" value="<?php echo htmlspecialchars($currentLang); ?>">
+                    <button type="submit" style="display: none;">Search</button> <!-- Hidden submit button -->
                 </form>
 
-                <!-- Filter Form with Dropdown -->
+                <!-- Filter Dropdown -->
                 <form method="GET" action="" class="filter-form" style="display: inline-block; position: relative;">
                     <button class="filter-btn titillium-web-regular"><?php echo htmlspecialchars($text[$currentLang]['filter']); ?></button>
                     <div class="filter-dropdown">
                         <div class="filter-options">
-                            <!-- Dynamically generate filter options based on unique keywords -->
                             <?php foreach ($uniqueKeywords as $keyword): ?>
-                                <a href="?filter=<?php echo urlencode($keyword); ?>&lang=<?php echo $currentLang; ?>" 
+                                <a href="?filter=<?php echo urlencode($keyword); ?>&lang=<?php echo htmlspecialchars($currentLang); ?>" 
                                    class="filter-option <?php echo (strtolower($filterKeyword) === strtolower($keyword)) ? 'selected' : ''; ?>">
                                     <?php echo htmlspecialchars(ucwords($keyword)); ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>
-                        <?phpW
+                        <?php
                             $queryParams = $_GET;
                             unset($queryParams['filter']);
                             $queryString = http_build_query($queryParams);
@@ -106,11 +107,13 @@ if ($isAjax) {
                             </a>
                         </div>
                     </div>
-                    <input type="hidden" name="lang" value="<?php echo $currentLang; ?>">
+                    <input type="hidden" name="lang" value="<?php echo htmlspecialchars($currentLang); ?>">
                 </form>
 
-                <!-- Get Your Filter Button -->
-                <a href="Survey?lang=<?php echo $currentLang; ?>"><button class="survey-btn titillium-web-regular"><?php echo htmlspecialchars($text[$currentLang]['quiz_button_products']); ?></button></a>
+                <!-- Survey Button -->
+                <a href="Survey?lang=<?php echo htmlspecialchars($currentLang); ?>">
+                    <button class="survey-btn titillium-web-regular"><?php echo htmlspecialchars($text[$currentLang]['quiz_button_products']); ?></button>
+                </a>
             </div>
             <div class="survey-prompt">
                 <p class="survey-title titillium-web-semibold"><?php echo htmlspecialchars($text[$currentLang]['survey_title']); ?></p>
@@ -133,7 +136,8 @@ if ($isAjax) {
             <?php endif; ?>
         </section>
     </main>
-    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/footer.php"; ?>
+    <?php require __DIR__ . '/Parts/footer.php'; ?>
+
     <script src="JS/products.js"></script>
 </body>
 </html>

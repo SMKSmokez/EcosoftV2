@@ -18,4 +18,3 @@ function urlIs($value){
     
     die();
  }
-?>

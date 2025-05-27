@@ -37,7 +37,7 @@
 
         <section class="filter-query">
             <div class="filter-query-split">
-                <div class="filter-query-text">
+               <div class="filter-query-text">
                     <p class="titillium-web-regular">
                         <?php echo $text[$lang]['filter_text']; ?>
                     </p>
@@ -47,11 +47,19 @@
                     <p class="quiz-prompt">
                         <?php echo $text[$lang]['quiz_prompt']; ?>
                     </p>
+                
+                    <!-- ✅ Mobile-only button -->
+                    <a href="Survey<?php echo '?lang=' . urlencode($lang); ?>" class="quiz-button quiz-button-mobile titillium-web-bold">
+                        <?php echo $text[$lang]['quiz_button']; ?>
+                    </a>
                 </div>
+                
+                <!-- ✅ Desktop image section with original button -->
                 <div class="filter-query-image">
-                    <a href="Survey<?php echo '?lang=' . urlencode($lang); ?>" class="quiz-button titillium-web-bold"><?php echo $text[$lang]['quiz_button']; ?></a>
+                    <a href="Survey<?php echo '?lang=' . urlencode($lang); ?>" class="quiz-button quiz-button-desktop titillium-web-bold">
+                        <?php echo $text[$lang]['quiz_button']; ?>
+                    </a>
                 </div>
-            </div>
         </section>
         <?php require __DIR__ . '/Parts/footer.php'; ?>
     </div>

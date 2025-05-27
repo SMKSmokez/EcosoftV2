@@ -160,7 +160,6 @@ body::-webkit-scrollbar-thumb {
     width: 85px;
     height: 80px;
     object-fit: contain;
-    border-radius: 8px;
 }
 
 .language-selector:hover {
@@ -231,32 +230,79 @@ body::-webkit-scrollbar-thumb {
     margin-left: auto;
 }
 
-@media (max-width: 600px) {
-    .navbar-icons {
-        gap: 1rem;
+.mobile-navbar {
+    display: none;
+}
+
+.mobile-slide-menu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    body::-webkit-scrollbar {
+        display: none;
     }
 
-    .nav-icon {
-        width: 30px;
-        height: 30px;
+    .desktop-navbar {
+        display: none;
     }
 
-    .nav-icon.active {
-        transform: scale(1.3);
+    .navbar {
+        height: 70px;
     }
 
-    .nav-icon:hover {
-        transform: scale(1.1);
+    .mobile-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--main);
+        position: relative;
     }
 
-    .language-selector {
-        width: 18px;
-        height: 18px;
+    /* Default mobile logo: centered */
+    .mobile-navbar .navbar-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
-    .language-selector img {
-        width: 18px;
-        height: 18px;
+    .mobile-navbar .navbar-logo .logo-svg {
+        height: 50px;
+        width: auto;
+    }
+
+    .hamburger-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2.2rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+    }
+
+    .hamburger-btn:focus {
+        outline: none;
+    }
+
+    .hamburger-btn:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+
+    .mobile-navbar .navbar-language .language-selector {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .mobile-navbar .navbar-language .language-selector img {
+        width: 36px !important;
+        height: 36px !important;
+        object-fit: contain;
     }
 
     .language-option {
@@ -271,11 +317,58 @@ body::-webkit-scrollbar-thumb {
         border-radius: 2px;
     }
 
-    .navbar.transparent .language-dropdown {
+    .navbar.transparent .language-dropdown,
+    .navbar.transparent .language-dropdown.active {
         background-color: transparent;
     }
 
-    .navbar.transparent .language-dropdown.active {
-        background-color: transparent;
+    .nav-icon.active {
+        transform: none;
+    }
+
+    .mobile-slide-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 70px;
+        background-color: var(--main);
+        z-index: 1100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        transition: left 0.3s ease-in-out;
+        padding: 0 2rem;
+    }
+
+    .mobile-slide-menu.active {
+        left: 0;
+    }
+
+    .mobile-slide-menu .mobile-nav-link img {
+        width: 50px;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .mobile-slide-menu .mobile-nav-link:hover {
+        color: var(--ex);
+    }
+
+    .mobile-navbar.index-404-layout .hamburger-btn {
+        display: none;
+    }
+
+    .mobile-navbar.index-404-layout .navbar-logo {
+        position: absolute;
+        left: 1rem;
+        transform: none;
+    }
+
+    .mobile-navbar.index-404-layout .navbar-language {
+        position: absolute;
+        right: 1rem;
     }
 }

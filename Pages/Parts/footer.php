@@ -4,7 +4,7 @@
     <div class="footer-content">
         <div class="contact-info">
             <h3 class="titillium-web-semibold">Contact Us</h3>
-            <p class="titillium-web-regular">Email: info@ecosoft.com</p>
+            <p class="titillium-web-regular">Email: ecosoftmne@gmail.com</p>
             <p class="titillium-web-regular">Phone:  +382-67-036-993</p>
             <p class="titillium-web-regular">Address: 46 Rr. Nënë Tereza</p>
         </div>

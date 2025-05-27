@@ -79,3 +79,61 @@
 .footer-bottom p {
     font-size: 14px;
 }
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: nowrap; /* no wrapping */
+        gap: 1.5rem;
+        min-width: 500px; /* ensure enough space for row layout */
+    }
+
+    .contact-info,
+    .social-links {
+        min-width: 165px;
+        flex: 0 0 auto; /* prevent shrinking or wrapping */
+    }
+
+    .contact-info h3,
+    .social-links h3 {
+        font-size: 18px;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info p {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 0.3rem;
+    }
+
+    .social-icons {
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .social-icon {
+        height: 40px;
+        width: 40px;
+        scale: 1.5;
+        margin-bottom: 0.3rem;
+    }
+
+    .footer-bottom {
+        margin-top: 1.5rem;
+        padding-top: 0.8rem;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+        text-align: center;
+    }
+}
+

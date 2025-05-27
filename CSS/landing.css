@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -236,6 +236,14 @@
     background-color: var(--ex);
 }
 
+.quiz-button-desktop {
+    display: inline-block;
+}
+
+.quiz-button-mobile {
+    display: none;
+}
+
 .footer {
     background-color: var(--main);
     color: var(--l-text);
@@ -310,4 +318,99 @@
 
 .footer-bottom p {
     font-size: 14px;
+}
+
+/* === MOBILE STYLES === */
+@media (max-width: 768px) {
+    .hero {
+        padding: 1rem;
+    }
+
+    .hero-text h1 {
+        font-size: 35px;
+    }
+
+    .hero-text .subtext {
+        display: none;
+    }
+
+    .about-block {
+        font-size: 24px;
+        padding: 0.5rem;
+    }
+
+    .landing-icon {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .icon-link p {
+        font-size: 20px;
+    }
+
+    .filter-query {
+        padding: 2rem 1rem;
+        height: auto;
+        background: var(--background);
+    }
+
+    .filter-query-split {
+        flex-direction: column;
+    }
+
+    .filter-query-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .filter-query-text .titillium-web-regular {
+        font-size: 24px;
+    }
+
+    .filter-query-subtext {
+        font-size: 18px;
+    }
+
+    .quiz-prompt {
+        font-size: 16px;
+    }
+
+    /* Show only mobile version of button */
+    .quiz-button-desktop {
+        display: none;
+    }
+
+    .quiz-button-mobile {
+        display: inline-block;
+        font-size: 22px;
+        padding: 1.5rem 1rem;
+        margin-top: 1rem;
+        background-color: #89aac799;
+        color: var(--l-text);
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        max-width: 90%;
+        width: fit-content;
+    }
+
+    .filter-query-image {
+        display: none;
+    }
+
+    .contact-info h3,
+    .social-links h3 {
+        font-size: 14px;
+    }
+
+    .contact-info p,
+    .social-link {
+        font-size: 6px;
+    }
+
+    .footer-bottom p {
+        font-size: 4px;
+    }
 }

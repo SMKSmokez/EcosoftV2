@@ -32,7 +32,6 @@ languageOptions.forEach(option => {
         }
 
         languageDropdown.classList.remove('active');
-
         window.location.href = `?lang=${selectedLang}`;
     });
 });
@@ -42,5 +41,42 @@ navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (window.location.pathname.includes(href)) {
         link.classList.add('active');
+    }
+});
+
+// Hamburger Menu Slide-In Logic
+const hamburgerBtn = document.querySelector('.hamburger-btn');
+const currentLang = new URLSearchParams(window.location.search).get('lang') || 'en';
+
+const slideMenu = document.createElement('div');
+slideMenu.classList.add('mobile-slide-menu');
+slideMenu.innerHTML = `
+    <a href="Products?lang=${currentLang}" class="mobile-nav-link">
+        <img src="Images/Icons/products_icon.svg" alt="Products Icon">
+    </a>
+    <a href="About?lang=${currentLang}" class="mobile-nav-link">
+        <img src="Images/Icons/About us - icon.svg" alt="About Us Icon">
+    </a>
+    <a href="Survey?lang=${currentLang}" class="mobile-nav-link">
+        <img src="Images/Icons/contact-icon.svg" alt="Contact Icon">
+    </a>
+`;
+document.body.appendChild(slideMenu);
+
+let menuOpen = false;
+
+const toggleMenu = () => {
+    menuOpen = !menuOpen;
+    slideMenu.classList.toggle('active', menuOpen);
+};
+
+hamburgerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+});
+
+document.addEventListener('click', (e) => {
+    if (menuOpen && !slideMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        toggleMenu();
     }
 });

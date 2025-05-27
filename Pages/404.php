@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <?php require "\\xampp\htdocs\EcosoftV2\Pages/Parts/navbar.php";?>
+    <?php require __DIR__ . '/Parts/navbar.php';?>
     <div class="page-container" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: var:(--background);">
         <section style="padding: 40px;">
             <h1 class="titillium-web-bold" style="font-size: 4rem; color: var: (--d-text);">404 - Page Not Found</h1>
